@@ -1,0 +1,8 @@
+.switch {width: 30px; height: 15px; background: #cccccc; background: rgba(0, 0, 0, 0.2); -webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; display: inline-block; position: relative; vertical-align: middle; -moz-transition: .25s ease-in-out; -webkit-transition: .25s ease-in-out; transition: .25s ease-in-out; cursor: pointer; margin: 1px 5px 4px 0 }
+.switch .handler { width: 13px; height: 13px; left:2px;  background: #ffffff; -webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); display: block; position: absolute; top: 1px; -webkit-transition: .25s ease-in-out; -moz-transition: .25s ease-in-out; transition: .25s ease-in-out; content: ""; }
+.switch.active { background: #a5d941; }
+.switch.active .handler { left: 16px;  }
+.switch.disable { -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)"; /* IE 8 */ filter: alpha(opacity=40); /* IE 5-7 */ -moz-opacity: 0.4; /* Netscape */ -khtml-opacity: 0.4;  /* Safari 1.x */ opacity: 0.4; /* Good browsers */ cursor: default; }
+.switch-large {width: 40px; height: 20px;}
+.switch-large .handler {width: 18px; height: 18px; left: 1px;}
+.switch-large.active .handler {left: 21px; }
