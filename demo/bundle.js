@@ -20644,7 +20644,7 @@
 		disabled: _react2['default'].PropTypes.bool,
 		size: _react2['default'].PropTypes.oneOf(['m', 'lg']),
 		name: _react2['default'].PropTypes.string,
-		value: _react2['default'].propTypes.oneOfType([_react2['default'].PropTypes.string, _react2['default'].PropTypes.number])
+		value: _react2['default'].PropTypes.oneOfType([_react2['default'].PropTypes.string, _react2['default'].PropTypes.number])
 	};
 	
 	Switch.defaultProps = {

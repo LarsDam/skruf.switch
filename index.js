@@ -65,7 +65,7 @@ Switch.propTypes = {
 	disabled: React.PropTypes.bool,
 	size: React.PropTypes.oneOf(['m', 'lg']),
 	name: React.PropTypes.string,
-	value: React.propTypes.oneOfType([
+	value: React.PropTypes.oneOfType([
 		React.PropTypes.string,
 		React.PropTypes.number
 	])
