@@ -1,7 +1,7 @@
 import React from 'react';
-import Switch from '../index';
+import Switch from '../compiled';
 
-window.React = React;
+require('../style.css');
 
 class App extends React.Component {
 
@@ -22,7 +22,7 @@ class App extends React.Component {
 				<Switch on={this.state.s1} onChange={this.onChange.bind(this)} name="s1">
 					Toggle me! ({this.state.s1 ? 'on' : 'off'})
 				</Switch>
-				
+
 				<br />
 
 				<Switch on={this.state.s2} onChange={this.onChange.bind(this)} name="s2">

@@ -1,7 +1,5 @@
 import React from 'react';
 
-require('./style.css');
-
 class Switch extends React.Component {
 
 	constructor(props) {
