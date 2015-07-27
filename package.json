@@ -1,6 +1,6 @@
 {
   "name": "@skruf/switch",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A toggle switch component for react",
   "main": "compiled.js",
   "scripts": {
