@@ -74,9 +74,7 @@
 	
 			_get(Object.getPrototypeOf(App.prototype), 'constructor', this).call(this, props);
 			this.state = {
-				s1: true,
-				s2: false,
-				s3: true
+				settings: 10
 			};
 		}
 	
@@ -89,25 +87,25 @@
 					null,
 					_react2['default'].createElement(
 						_compiled2['default'],
-						{ on: this.state.s1, onChange: this.onChange.bind(this), name: "s1" },
+						{ on: (this.state.settings & 2) === 2, onChange: this.onChange.bind(this), name: "s1", value: 2 },
 						'Toggle me! (',
-						this.state.s1 ? 'on' : 'off',
+						this.state.settings & 2 ? 'on' : 'off',
 						')'
 					),
 					_react2['default'].createElement('br', null),
 					_react2['default'].createElement(
 						_compiled2['default'],
-						{ on: this.state.s2, onChange: this.onChange.bind(this), name: "s2" },
+						{ on: (this.state.settings & 4) === 4, onChange: this.onChange.bind(this), name: "s2", value: 4 },
 						'Will get cancelled! (',
-						this.state.s2 ? 'on' : 'off',
+						this.state.settings & 4 ? 'on' : 'off',
 						')'
 					),
 					_react2['default'].createElement('br', null),
 					_react2['default'].createElement(
 						_compiled2['default'],
-						{ on: this.state.s3, onChange: this.onChange.bind(this), name: "s3", disabled: true },
+						{ on: (this.state.settings & 8) === 8, onChange: this.onChange.bind(this), name: "s3", disabled: true, value: 8 },
 						'Disabled! (',
-						this.state.s3 ? 'on' : 'off',
+						this.state.settings & 8 ? 'on' : 'off',
 						')'
 					),
 					_react2['default'].createElement('br', null),
@@ -120,16 +118,20 @@
 			}
 		}, {
 			key: 'onChange',
-			value: function onChange(name, on) {
-				var state = this.state;
-	
+			value: function onChange(name, value, on) {
+				var s = this.state.settings;
 				if (name === 's2') {
-					on = false;
+					this.forceUpdate();
+					return;
 				}
 	
-				state[name] = on;
+				if (this.state.settings & value) {
+					s -= value;
+				} else {
+					s += value;
+				}
 	
-				this.setState({ state: state });
+				this.setState({ settings: s });
 			}
 		}]);
 	
@@ -20627,7 +20629,7 @@
 	
 				if (this.props.onChange) {
 					setTimeout(function () {
-						_this.props.onChange(_this.props.name, on);
+						_this.props.onChange(_this.props.name, _this.props.value, on);
 					}, 400);
 				}
 			}
@@ -20640,7 +20642,9 @@
 		on: _react2['default'].PropTypes.bool,
 		onChange: _react2['default'].PropTypes.func,
 		disabled: _react2['default'].PropTypes.bool,
-		size: _react2['default'].PropTypes.oneOf(['m', 'lg'])
+		size: _react2['default'].PropTypes.oneOf(['m', 'lg']),
+		name: _react2['default'].PropTypes.string,
+		value: _react2['default'].propTypes.oneOfType([_react2['default'].PropTypes.string, _react2['default'].PropTypes.number])
 	};
 	
 	Switch.defaultProps = {

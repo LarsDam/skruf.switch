@@ -53,7 +53,7 @@ class Switch extends React.Component {
 
 		if(this.props.onChange) {
 			setTimeout(() => {
-				this.props.onChange(this.props.name, on)	
+				this.props.onChange(this.props.name, this.props.value, on);
 			}, 400);
 		}
 	}
@@ -63,7 +63,12 @@ Switch.propTypes = {
 	on: React.PropTypes.bool,
 	onChange: React.PropTypes.func,
 	disabled: React.PropTypes.bool,
-	size: React.PropTypes.oneOf(['m', 'lg'])
+	size: React.PropTypes.oneOf(['m', 'lg']),
+	name: React.PropTypes.string,
+	value: React.propTypes.oneOfType([
+		React.PropTypes.string,
+		React.PropTypes.number
+	])
 };
 
 Switch.defaultProps = { 

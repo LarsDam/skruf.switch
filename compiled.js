@@ -82,7 +82,7 @@ var Switch = (function (_React$Component) {
 
 			if (this.props.onChange) {
 				setTimeout(function () {
-					_this.props.onChange(_this.props.name, on);
+					_this.props.onChange(_this.props.name, _this.props.value, on);
 				}, 400);
 			}
 		}
@@ -95,7 +95,9 @@ Switch.propTypes = {
 	on: _react2['default'].PropTypes.bool,
 	onChange: _react2['default'].PropTypes.func,
 	disabled: _react2['default'].PropTypes.bool,
-	size: _react2['default'].PropTypes.oneOf(['m', 'lg'])
+	size: _react2['default'].PropTypes.oneOf(['m', 'lg']),
+	name: _react2['default'].PropTypes.string,
+	value: _react2['default'].propTypes.oneOfType([_react2['default'].PropTypes.string, _react2['default'].PropTypes.number])
 };
 
 Switch.defaultProps = {

@@ -8,9 +8,7 @@ class App extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			s1: true,
-			s2: false,
-			s3: true
+			settings: 10
 		};
 	}
 
@@ -19,20 +17,20 @@ class App extends React.Component {
 		return (
 			<div>
 
-				<Switch on={this.state.s1} onChange={this.onChange.bind(this)} name="s1">
-					Toggle me! ({this.state.s1 ? 'on' : 'off'})
+				<Switch on={(this.state.settings & 2) === 2} onChange={this.onChange.bind(this)} name="s1" value={2}>
+					Toggle me! ({(this.state.settings & 2) ? 'on' : 'off'})
 				</Switch>
 
 				<br />
 
-				<Switch on={this.state.s2} onChange={this.onChange.bind(this)} name="s2">
-					Will get cancelled! ({this.state.s2 ? 'on' : 'off'})
+				<Switch on={(this.state.settings & 4) === 4} onChange={this.onChange.bind(this)} name="s2" value={4}>
+					Will get cancelled! ({(this.state.settings & 4) ? 'on' : 'off'})
 				</Switch>
 
 				<br />
 
-				<Switch on={this.state.s3} onChange={this.onChange.bind(this)} name="s3" disabled={true}>
-					Disabled! ({this.state.s3 ? 'on' : 'off'})
+				<Switch on={(this.state.settings & 8) === 8} onChange={this.onChange.bind(this)} name="s3" disabled={true} value={8}>
+					Disabled! ({(this.state.settings & 8) ? 'on' : 'off'})
 				</Switch>
 
 				<br />
@@ -45,16 +43,20 @@ class App extends React.Component {
 		);
 	}
 
-	onChange(name, on) {
-		let state = this.state;
-
+	onChange(name, value, on) {
+		let s = this.state.settings;
 		if(name === 's2') {
-			on = false;
+			this.forceUpdate();
+			return;
 		}
 
-		state[name] = on;
+		if(this.state.settings & value) {
+			s -= value;
+		} else {
+			s += value;
+		}
 
-		this.setState({state});
+		this.setState({settings: s});
 	}
 }
 
