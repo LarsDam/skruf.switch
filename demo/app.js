@@ -46,8 +46,10 @@ class App extends React.Component {
 	onChange(name, value, on) {
 		let s = this.state.settings;
 		if(name === 's2') {
-			this.forceUpdate();
-			return;
+			setTimeout(() => {
+				s -= value;
+				this.setState({settings: s});
+			}, 250);
 		}
 
 		if(this.state.settings & value) {

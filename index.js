@@ -4,11 +4,10 @@ class Switch extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = {on: props.on};
 	}
 
 	componentWillReceiveProps(nextProps) {
-		if('on' in nextProps && this.state.on !== nextProps.on) {
+		if('on' in nextProps && this.props.on !== nextProps.on) {
 			this.setState({on: nextProps.on});
 		}
 	}
@@ -16,7 +15,7 @@ class Switch extends React.Component {
 	render() {
 		var cls = 'switch';
 
-		if(this.state.on) {
+		if(this.props.on) {
 			cls += ' active';
 		}
 
@@ -31,7 +30,7 @@ class Switch extends React.Component {
 		return (
 			<label onClick={this.handleClick.bind(this)}>
 				<div className={cls}>
-					<input type="checkbox" readOnly checked={this.state.on} style={{display: 'none'}} />
+					<input type="checkbox" readOnly checked={this.props.on} style={{display: 'none'}} />
 					<div className="handler"></div>
 				</div>
 				{this.props.children}
@@ -40,7 +39,7 @@ class Switch extends React.Component {
 	}
 
 	handleClick(e) {
-		let on = !this.state.on;
+		let on = !this.props.on;
 
 		e.stopPropagation();
 		e.preventDefault();
@@ -49,17 +48,13 @@ class Switch extends React.Component {
 			return;
 		}
 
-		this.setState({on: on});
-
 		if(this.props.onChange) {
-			setTimeout(() => {
-				this.props.onChange(this.props.name, this.props.value, on);
-			}, 400);
+			this.props.onChange(this.props.name, this.props.value, on);
 		}
 	}
 }
 
-Switch.propTypes = { 
+Switch.propTypes = {
 	on: React.PropTypes.bool,
 	onChange: React.PropTypes.func,
 	disabled: React.PropTypes.bool,
@@ -71,7 +66,7 @@ Switch.propTypes = {
 	])
 };
 
-Switch.defaultProps = { 
+Switch.defaultProps = {
 	on: false,
 	disabled: false,
 	size: 'm'
