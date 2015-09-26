@@ -6,12 +6,6 @@ class Switch extends React.Component {
 		super(props);
 	}
 
-	componentWillReceiveProps(nextProps) {
-		if('on' in nextProps && this.props.on !== nextProps.on) {
-			this.setState({on: nextProps.on});
-		}
-	}
-
 	render() {
 		var cls = 'switch';
 
@@ -28,9 +22,9 @@ class Switch extends React.Component {
 		}
 
 		return (
-			<label onClick={this.handleClick.bind(this)}>
+			<label>
 				<div className={cls}>
-					<input type="checkbox" readOnly checked={this.props.on} style={{display: 'none'}} />
+					<input type="checkbox" name={this.props.name} readOnly checked={this.props.on} style={{display: 'none'}} onClick={this.handleClick.bind(this)} value={this.props.value} />
 					<div className="handler"></div>
 				</div>
 				{this.props.children}
@@ -49,7 +43,7 @@ class Switch extends React.Component {
 		}
 
 		if(this.props.onChange) {
-			this.props.onChange(this.props.name, this.props.value, on);
+			this.props.onChange(e);
 		}
 	}
 }

@@ -43,8 +43,10 @@ class App extends React.Component {
 		);
 	}
 
-	onChange(name, value, on) {
+	onChange(e) {
 		let s = this.state.settings;
+		let name = e.target.name;
+		let value = parseInt(e.target.value, 10);
 		if(name === 's2') {
 			setTimeout(() => {
 				s -= value;

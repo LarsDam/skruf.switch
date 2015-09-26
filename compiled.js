@@ -28,13 +28,6 @@ var Switch = (function (_React$Component) {
 	}
 
 	_createClass(Switch, [{
-		key: 'componentWillReceiveProps',
-		value: function componentWillReceiveProps(nextProps) {
-			if ('on' in nextProps && this.props.on !== nextProps.on) {
-				this.setState({ on: nextProps.on });
-			}
-		}
-	}, {
 		key: 'render',
 		value: function render() {
 			var cls = 'switch';
@@ -53,12 +46,12 @@ var Switch = (function (_React$Component) {
 
 			return _react2['default'].createElement(
 				'label',
-				{ onClick: this.handleClick.bind(this) },
+				null,
 				_react2['default'].createElement(
 					'div',
 					{ className: cls },
-					_react2['default'].createElement('input', { type: 'checkbox', readOnly: true, checked: this.props.on, style: { display: 'none' } }),
-					_react2['default'].createElement('div', { className: 'handler' })
+					_react2['default'].createElement('input', { type: "checkbox", name: this.props.name, readOnly: true, checked: this.props.on, style: { display: 'none' }, onClick: this.handleClick.bind(this), value: this.props.value }),
+					_react2['default'].createElement('div', { className: "handler" })
 				),
 				this.props.children
 			);
@@ -76,7 +69,7 @@ var Switch = (function (_React$Component) {
 			}
 
 			if (this.props.onChange) {
-				this.props.onChange(this.props.name, this.props.value, on);
+				this.props.onChange(e);
 			}
 		}
 	}]);
