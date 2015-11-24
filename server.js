@@ -1,16 +1,19 @@
-'use strict';
-var webpack = require('webpack');
-var WebpackDevServer = require('webpack-dev-server');
+var http = require('http');
+var fs = require('fs');
 
-var config = require('./webpack.config');
-
-
-new WebpackDevServer(webpack(config), {
-	publicPath: config.output.publicPath
-}).listen(3000, '0.0.0.0', function (err) {
-	if(err) {
-		return console.log(err);
+function handleRequest(req, res) {
+	var path = './demo/index.html';
+	if(req.url.indexOf('.') > -1) {
+		path = './demo/' + req.url;
 	}
 
-	console.log('Listening at 0.0.0.0:3000');
+	fs.readFile(path, function(err, content) {
+		res.end(content);
+	});
+}
+
+var server = http.createServer(handleRequest);
+
+server.listen(3000, function() {
+	console.log('Server listening');
 });

@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import Switch from '../compiled';
 
 require('../style.css');
@@ -64,7 +65,7 @@ class App extends React.Component {
 	}
 }
 
-React.render(
+ReactDOM.render(
 	<App />,
 	document.getElementById('main')
 );
