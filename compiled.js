@@ -24,15 +24,35 @@ var Switch = (function (_React$Component) {
 	function Switch(props) {
 		_classCallCheck(this, Switch);
 
-		return _possibleConstructorReturn(this, Object.getPrototypeOf(Switch).call(this, props));
+		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Switch).call(this, props));
+
+		_this.handleChange = _this.handleChange.bind(_this);
+
+		var checked = false;
+
+		if ('on' in props) {
+			checked = _this.props.on;
+		}
+
+		_this.state = { checked: checked };
+		return _this;
 	}
 
 	_createClass(Switch, [{
+		key: 'componentWillReceiveProps',
+		value: function componentWillReceiveProps(nextProps) {
+			if ('on' in nextProps) {
+				this.setState({
+					checked: nextProps.on
+				});
+			}
+		}
+	}, {
 		key: 'render',
 		value: function render() {
 			var cls = 'switch';
 
-			if (this.props.on) {
+			if (this.state.checked) {
 				cls += ' active';
 			}
 
@@ -50,23 +70,21 @@ var Switch = (function (_React$Component) {
 				_react2.default.createElement(
 					'div',
 					{ className: cls },
-					_react2.default.createElement('input', { type: 'checkbox', name: this.props.name, readOnly: true, checked: this.props.on, style: { display: 'none' }, onClick: this.handleClick.bind(this), value: this.props.value }),
+					_react2.default.createElement('input', { type: 'checkbox', name: this.props.name, readOnly: true, checked: this.state.checked, style: { display: 'none' }, onChange: this.handleChange, value: this.props.value }),
 					_react2.default.createElement('div', { className: 'handler' })
 				),
 				this.props.children
 			);
 		}
 	}, {
-		key: 'handleClick',
-		value: function handleClick(e) {
-			var on = !this.props.on;
-
-			e.stopPropagation();
-			e.preventDefault();
+		key: 'handleChange',
+		value: function handleChange(e) {
 
 			if (this.props.disabled) {
 				return;
 			}
+
+			this.setState({ checked: !this.state.checked });
 
 			if (this.props.onChange) {
 				this.props.onChange(e);
@@ -76,6 +94,8 @@ var Switch = (function (_React$Component) {
 
 	return Switch;
 })(_react2.default.Component);
+
+exports.default = Switch;
 
 Switch.propTypes = {
 	on: _react2.default.PropTypes.bool,
@@ -91,5 +111,3 @@ Switch.defaultProps = {
 	disabled: false,
 	size: 'm'
 };
-
-exports.default = Switch;

@@ -1,11 +1,11 @@
 {
   "name": "@skruf/switch",
-  "version": "1.0.3",
+  "version": "1.0.6",
   "description": "A toggle switch component for react",
   "main": "compiled.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack && node server.js",
+    "start": "webpack --watch && node server.js",
     "compile": "babel index.js --out-file compiled.js"
   },
   "repository": {

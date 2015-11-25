@@ -1,15 +1,32 @@
 import React from 'react';
 
-class Switch extends React.Component {
+export default class Switch extends React.Component {
 
 	constructor(props) {
 		super(props);
+		this.handleChange = this.handleChange.bind(this);
+
+		let checked = false;
+
+		if('on' in props) {
+			checked = this.props.on;
+		}
+
+		this.state = {checked};
+	}
+
+	componentWillReceiveProps(nextProps) {
+		if ('on' in nextProps) {
+			this.setState({
+				checked: nextProps.on
+			});
+		}
 	}
 
 	render() {
 		var cls = 'switch';
 
-		if(this.props.on) {
+		if(this.state.checked) {
 			cls += ' active';
 		}
 
@@ -24,7 +41,7 @@ class Switch extends React.Component {
 		return (
 			<label>
 				<div className={cls}>
-					<input type="checkbox" name={this.props.name} readOnly checked={this.props.on} style={{display: 'none'}} onClick={this.handleClick.bind(this)} value={this.props.value} />
+					<input type="checkbox" name={this.props.name} readOnly checked={this.state.checked} style={{display: 'none'}} onChange={this.handleChange} value={this.props.value} />
 					<div className="handler"></div>
 				</div>
 				{this.props.children}
@@ -32,15 +49,13 @@ class Switch extends React.Component {
 		);
 	}
 
-	handleClick(e) {
-		let on = !this.props.on;
-
-		e.stopPropagation();
-		e.preventDefault();
+	handleChange(e) {
 
 		if(this.props.disabled) {
 			return;
 		}
+
+		this.setState({checked: !this.state.checked});
 
 		if(this.props.onChange) {
 			this.props.onChange(e);
@@ -65,5 +80,3 @@ Switch.defaultProps = {
 	disabled: false,
 	size: 'm'
 };
-
-export default Switch;
